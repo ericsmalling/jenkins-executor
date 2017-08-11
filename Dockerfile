@@ -1,4 +1,4 @@
-FROM docker:17.05
+FROM docker:17.06
 
 RUN adduser -G root -D jenkins \
  && apk --update --no-cache add openjdk8-jre python py-pip git openssh bash \
