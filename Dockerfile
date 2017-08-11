@@ -9,5 +9,7 @@ RUN adduser -G root -D jenkins \
 COPY swarm-client-3.3.jar /home/jenkins/swarm-client.jar
 COPY wait-for-it.sh /home/jenkins/wait-for-it.sh
 
-ENV DOCKER_VER=$DOCKER_VER
-CMD /home/jenkins/wait-for-it.sh -t 0 jenkins:50000 -- java -jar /home/jenkins/swarm-client.jar -master http://jenkins:8080 -labels 'docker' -fsroot /var/jenkins_workspace -executors 1 -labels $DOCKER_VER
+ARG DOCKER_VER
+ENV DVER ${DOCKER_VER}
+CMD /home/jenkins/wait-for-it.sh -t 0 jenkins:50000 -- java -jar /home/jenkins/swarm-client.jar -master http://jenkins:8080 -labels "docker ${DVER}" -fsroot /var/jenkins_workspace -executors 1 
+
