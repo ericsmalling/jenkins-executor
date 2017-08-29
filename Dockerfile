@@ -11,5 +11,5 @@ COPY wait-for-it.sh /home/jenkins/wait-for-it.sh
 
 ARG DOCKER_VER
 ENV DVER ${DOCKER_VER}
-CMD /home/jenkins/wait-for-it.sh -t 0 jenkins:50000 -- java -jar /home/jenkins/swarm-client.jar -master http://jenkins:8080 -labels "docker ${DVER}" -fsroot /var/jenkins_workspace -executors 1 
+CMD /home/jenkins/wait-for-it.sh -t 0 jenkins:50000 -- java -jar /home/jenkins/swarm-client.jar -master http://jenkins:8080 -labels docker -labels ${DVER} -fsroot /var/jenkins_workspace -executors 1 
 
