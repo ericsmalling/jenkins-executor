@@ -2,7 +2,7 @@ ARG DOCKER_VER=17.06
 FROM docker:${DOCKER_VER}
 
 RUN adduser -G root -D jenkins \
- && apk --update --no-cache add openjdk8-jre python py-pip git openssh bash \
+ && apk --update --no-cache add openjdk8-jre python py-pip git openssh bash build-base \
  && pip install docker-compose
 
 #USER jenkins
