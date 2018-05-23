@@ -1,7 +1,7 @@
 # Jenkins Swarm based executor Docker image
 A basic Docker image that will connect to a Jenkins master using the [Jenkins Swarm Plugin](https://wiki.jenkins.io/display/JENKINS/Swarm+Plugin) and includes a Docker client pre-installed.
 
-_TODO: Add Jenkins master setup details here_
+For a simple example running on swarm, see the [full_stack](/full_stack) subdirectory here.
 
 ### Example usage via docker-compose / stack YAML:
 ```

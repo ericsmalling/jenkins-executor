@@ -1,0 +1,68 @@
+# Centralized Jenkins CI stack example with dynamic build agents (assumed that master has Jenkins Swarm Plugin installed)
+version: '3.3'
+
+services:
+  master:
+    image: ericsmalling/jenkins-master
+    ports:
+      - 8080:8080
+    deploy:
+      # placement:
+      #   constraints:
+      #     - node.labels.jenkins == master
+      replicas: 1
+      resources:
+        limits:
+          memory: 2G
+        reservations:
+          memory: 2G
+      restart_policy:
+        condition: on-failure
+    volumes:
+      - master:/var/jenkins_home
+    networks:
+      - jenkins
+    secrets:
+      - jenkins_user
+      - jenkins_password
+
+  agent:
+    image: ericsmalling/jenkins-agent
+    environment:
+      - "MASTER_HOST=master"
+      - "MASTER_JNLP_PORT=50000"
+      - "MASTER_HTTP_PORT=8080"
+    deploy:
+      mode: global
+      # placement:
+      #   constraints:
+      #     - node.labels.jenkins == agent
+      resources:
+        limits:
+          memory: 1G
+        reservations:
+          memory: 1G
+      restart_policy:
+        condition: on-failure
+    secrets:
+      - jenkins_user
+      - jenkins_password
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+      - agent-workspace:/var/jenkins_workspace
+    networks:
+      - jenkins
+
+
+volumes:
+  master:
+  agent-workspace:
+
+secrets:
+  jenkins_user:
+    file: secrets/jenkins_user
+  jenkins_password:
+    file: secrets/jenkins_password
+
+networks:
+  jenkins:

@@ -1,0 +1,14 @@
+version: '3.4'
+
+services:
+  master:
+    build:
+      context: .
+      target: jenkins-master
+    image: ericsmalling/jenkins-master 
+
+  agent:
+    build:
+      context: .
+      target: jenkins-agent
+    image: ericsmalling/jenkins-agent
