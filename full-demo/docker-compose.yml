@@ -11,11 +11,11 @@ services:
       #   constraints:
       #     - node.labels.jenkins == master
       replicas: 1
-      resources:
-        limits:
-          memory: 2G
-        reservations:
-          memory: 2G
+      #resources:
+      # limits:
+      #    memory: 2G
+      #  reservations:
+      #    memory: 2G
       restart_policy:
         condition: on-failure
     volumes:
@@ -37,11 +37,11 @@ services:
       # placement:
       #   constraints:
       #     - node.labels.jenkins == agent
-      resources:
-        limits:
-          memory: 1G
-        reservations:
-          memory: 1G
+      #resources:
+      #  limits:
+      #    memory: 1G
+      #  reservations:
+      #    memory: 1G
       restart_policy:
         condition: on-failure
     secrets:
