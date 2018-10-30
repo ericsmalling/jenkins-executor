@@ -6,7 +6,7 @@ RUN adduser -G root -D jenkins \
  && pip install docker-compose
 
 #USER jenkins
-COPY swarm-client-3.3.jar /home/jenkins/swarm-client.jar
+COPY swarm-client-3.14.jar /home/jenkins/swarm-client.jar
 COPY wait-for-it.sh /home/jenkins/wait-for-it.sh
 
 ARG DOCKER_VER
